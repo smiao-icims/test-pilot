@@ -1,0 +1,6 @@
+#!/Users/smiao/Documents/Workspace/GitHub/logging-demo/test-pilot/.venv/bin/python
+import sys
+from modelforge.cli import cli
+
+if __name__ == '__main__':
+    sys.exit(cli())

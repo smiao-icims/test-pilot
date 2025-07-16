@@ -6,14 +6,13 @@ This test suite covers the complete user journey in the iCIMS platform:
 - **Authentication**: Login and session management
 - **Job Management**: Search, view, and navigate job requisitions
 - **Candidate Management**: Review candidates and handle attachments
-- **System Navigation**: Test all main menu sections
 - **File Operations**: Upload and download attachments
 - **Session Management**: Proper logout and session termination
 
 ## Prerequisites
 
 Before running this test:
-1. **Environment Setup**: Verify `.env` file exists with configured credentials (in home or playwright-mcp-demo directory)
+1. **Environment Setup**: 
 2. **Access Rights**: Ensure test account has appropriate permissions
 3. **Network Access**: Verify connectivity to iCIMS platform
 4. **MCP Tool**: Confirm MCP Playwright tool is configured in VS Code
@@ -23,7 +22,6 @@ Before running this test:
 ```
 Browser: Chrome (recommended for this demo)
 Website: https://configrariet.icims.com
-Credentials: Loaded from .env file
 Network: Standard timeout settings
 ```
 
@@ -31,31 +29,14 @@ Network: Standard timeout settings
 
 ## Automatic Test Execution Instructions
 
-For seamless automated testing without manual intervention, use one of these prompt patterns:
+Complete the ATS testing workflow automatically.
+**Do not ask for confirmation. Complete all steps in the test suite automatically. If you encounter ambiguity, make a best guess and continue**
 
-### Option 1: Complete Auto-Execution
-```
-Complete the ATS testing workflow automatically. Execute all remaining test phases and finish with logout as specified in playwright-mcp-demo/examples/icims-ats-demo.md
-```
-
-### Option 2: State-Based Continuation  
-```
-Resume ATS testing from current state. Execute remaining test scenarios through completion automatically.
-```
-
-These prompts will instruct the AI to:
-- Continue testing from the current phase automatically
-- Execute phases 1, 2, 3, and 4 sequentially (Phase 5 is skipped for auto-execution)
-- Complete the streamlined workflow without pausing for confirmation
-- Finish with proper logout and session termination
-
-**Note**: Phase 5 (System Navigation Testing) is currently disabled for automatic execution to streamline the demo workflow.
-
----
 
 ## Manual Test Execution Instructions
 
 For step-by-step manual execution, copy and paste the following sections to execute the test suite using MCP Playwright tool:
+
 
 ### Phase 1: Authentication and Login
 
@@ -73,11 +54,13 @@ Please use the MCP Playwright tool to execute this complete iCIMS ATS login sequ
 
 3. **Login Process**:
    - Locate the "Username or email address" input field
-   - Enter username: ${ICIMS_USERNAME} (from .env file) 
+   - Enter username: automatedtesting@notanemail.com
+   - if you see a reCaptcha screen, check "I am a human"
    - Hit Enter or Click "Continue" button to proceed to password screen
    - Wait for password page to load completely
    - Locate the "Password" input field
-   - Enter password: ${ICIMS_PASSWORD} (from .env file)
+   - Enter password: Ready2test!
+   - if you see a reCaptcha screen, check "I am a human"
    - Hit Enter or Click the "LOG IN" button
 
 4. **Two-Factor Authentication Handling**:
@@ -241,60 +224,7 @@ Expected Results: Access to candidate profiles and successful file operations
    - Click "Download File" 
    - Click "Close" button after the file is downloaded
 
-
-### Phase 5: System Navigation Testing *(SKIP FOR AUTO-EXECUTION)*
-
-> **NOTE FOR AUTOMATED TESTING**: This phase is currently disabled for automatic execution. 
-> When using auto-execution prompts, the AI will skip directly from Phase 3 to Phase 5 (Session Termination).
-> This section is preserved for manual testing reference only.
-
-```
-⚠️ MANUAL TESTING ONLY - NOT FOR AUTO-EXECUTION ⚠️
-
-Test complete system navigation using MCP Playwright tool:
-
-1. **Main Menu Navigation Testing**:
-   - Take accessibility snapshot to see main navigation
-   - Wait 3-5 seconds before attempting to interact with menu items
-   - For each menu interaction:
-     - Try clicking the menu item
-     - If clicking fails, try tabbing to focus the element and press Enter
-     - If both fail, consider direct URL navigation to the target page
-   - Test each main menu section systematically:
-
-2. **Create Menu**:
-   - Click "Create" in main navigation
-   - Select "Person" → "Person" from dropdown
-   - Verify navigation to Create Person page
-
-3. **Report Menu**:
-   - Click "Report" in main navigation
-   - Select "Performance Indicators" option
-   - Wait for dashboard to load
-   - Verify charts and metrics are displayed
-
-4. **Communicate Menu**:
-   - Click "Communicate" in main navigation
-   - Select "Compose Email" option
-   - Verify email composition interface opens
-
-5. **Library Menu**:
-   - Click "Library" in main navigation
-   - Select "Job Centre" from dropdown options
-   - Verify navigation to Job Centre page
-
-6. **Admin Menu**:
-   - Click "Admin" in main navigation
-   - Select "System Configuration" option
-   - Wait for admin interface to load
-   - Verify access to admin settings
-
-Expected Results: All main navigation sections accessible and functional
-
-⚠️ END OF MANUAL-ONLY SECTION ⚠️
-```
-
-### Phase 6: Session Termination
+### Phase 5: Session Termination
 
 ```
 Complete the test suite with proper logout:
@@ -395,34 +325,3 @@ Throughout test execution, verify:
    - Try direct URL navigation if possible
    - Use browser refresh and retry the operation
    - Increase wait times before interactions
-
-### UI Interaction Best Practices
-
-When working with the iCIMS interface through the MCP Playwright tool, follow these best practices to avoid element click issues:
-
-1. **Wait Sufficiently**: Always wait 1-2 seconds after page loads before attempting clicks
-   ```
-   Take accessibility snapshot of page
-   Wait for 1-2 seconds
-   Attempt interaction
-   ```
-
-2. **Use Keyboard Alternatives**:
-   - For form submissions, use Enter key after filling the last field
-   - For navigation menus, use Tab key to focus elements and Enter to activate
-   - For buttons that are difficult to click, try keyboard shortcuts
-
-3. **Direct Navigation**: When menu navigation fails, use direct URLs:
-   - Job Search: `https://configrariet.icims.com/platform/icims2?module=AppSearch&action=showSearch&searchType=Job`
-   - Logout: `https://login.icims.com/logout`
-   - Dashboard: `https://configrariet.icims.com/platform`
-
-4. **Element Selection Strategy**:
-   - When clicking fails, try describing elements differently in snapshots
-   - Look for parent or child elements that might be easier to target
-   - Try clicking different parts of the element (text vs. icon)
-
-5. **Recovery From Failed Clicks**:
-   - If a click fails, take a new snapshot before retrying
-   - Try tabbing to focus the element before clicking
-   - For dropdowns that don't open, try direct URL navigation to the target page

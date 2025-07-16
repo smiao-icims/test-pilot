@@ -1,66 +1,25 @@
 # iCIMS ATS Platform Complete Test Suite
 
-## Overview
+Please use the MCP Playwright tool configured to execute this complete the following test suite for the iCIMS ATS platform. This suite covers authentication, job search, and session termination processes.
 
-This test suite covers the complete user journey in the iCIMS platform:
-- **Authentication**: Login and session management
-- **Job Management**: Search, view, and navigate job requisitions
-- **Candidate Management**: Review candidates and handle attachments
-- **System Navigation**: Test all main menu sections
-- **File Operations**: Upload and download attachments
-- **Session Management**: Proper logout and session termination
+Please ensure you automate the test steps without manual intervention, and handle any potential issues such as reCaptcha prompts or two-factor authentication.
 
-## Prerequisites
 
-Before running this test:
-1. **Environment Setup**: Verify `.env` file exists with configured credentials (in home or playwright-mcp-demo directory)
-2. **Access Rights**: Ensure test account has appropriate permissions
-3. **Network Access**: Verify connectivity to iCIMS platform
-4. **MCP Tool**: Confirm MCP Playwright tool is configured in VS Code
-
-## Global Configuration
+## Configuration Details
 
 ```
 Browser: Chrome (recommended for this demo)
 Website: https://configrariet.icims.com
-Credentials: Loaded from .env file
+Credentials: Loaded from .env file if not provided
 Network: Standard timeout settings
+Accept cookies: Automatically accept cookies if prompted
 ```
 
 ---
-
-## Automatic Test Execution Instructions
-
-For seamless automated testing without manual intervention, use one of these prompt patterns:
-
-### Option 1: Complete Auto-Execution
-```
-Complete the ATS testing workflow automatically. Execute all remaining test phases and finish with logout as specified in playwright-mcp-demo/examples/icims-ats-demo.md
-```
-
-### Option 2: State-Based Continuation  
-```
-Resume ATS testing from current state. Execute remaining test scenarios through completion automatically.
-```
-
-These prompts will instruct the AI to:
-- Continue testing from the current phase automatically
-- Execute phases 1, 2, 3, and 4 sequentially (Phase 5 is skipped for auto-execution)
-- Complete the streamlined workflow without pausing for confirmation
-- Finish with proper logout and session termination
-
-**Note**: Phase 5 (System Navigation Testing) is currently disabled for automatic execution to streamline the demo workflow.
-
----
-
-## Manual Test Execution Instructions
-
-For step-by-step manual execution, copy and paste the following sections to execute the test suite using MCP Playwright tool:
 
 ### Phase 1: Authentication and Login
 
 ```
-Please use the MCP Playwright tool to execute this complete iCIMS ATS login sequence:
 
 1. **Initial Navigation**:
    - Navigate to https://configrariet.icims.com
@@ -73,11 +32,13 @@ Please use the MCP Playwright tool to execute this complete iCIMS ATS login sequ
 
 3. **Login Process**:
    - Locate the "Username or email address" input field
-   - Enter username: ${ICIMS_USERNAME} (from .env file) 
+   - Enter username: automatedtesting@notanemail.com
+   - if you see a reCaptcha screen, check "I am a human"
    - Hit Enter or Click "Continue" button to proceed to password screen
    - Wait for password page to load completely
    - Locate the "Password" input field
-   - Enter password: ${ICIMS_PASSWORD} (from .env file)
+   - Enter password: Ready2test!
+   - if you see a reCaptcha screen, check "I am a human"
    - Hit Enter or Click the "LOG IN" button
 
 4. **Two-Factor Authentication Handling**:
@@ -98,24 +59,13 @@ Expected Results: Successful authentication and access to iCIMS dashboard
 ### Phase 2: Job Search and Navigation
 
 ```
-Continue with job search testing using MCP Playwright tool:
+Continue with job search testing using MCP Playwright tool without manual intervention:
 
 1. **Navigate to Job Search**:
    - From the main dashboard, locate the "Search" menu button in main navigation toolbar
-   - **Method 1 - Hover then Click**:
      - First hover over the "Search" button to trigger the dropdown menu
      - Wait 1-2 seconds for dropdown to appear
      - Then click on "Job" option in the dropdown menu
-   - **Method 2 - Keyboard Navigation** (if Method 1 fails):
-     - Press Tab key repeatedly until "Search" button is focused (highlighted)
-     - Press Enter or Space key to open the dropdown menu
-     - Use Arrow Down key to navigate to "Job" option
-     - Press Enter to select "Job" option
-   - **Method 3 - Force Click Sequence** (if above methods fail):
-     - Take accessibility snapshot to see current state
-     - Try clicking on "Search" button multiple times with 1-second delays
-     - Look for dropdown menu appearance in subsequent snapshots
-     - Click on "Job" option when dropdown becomes visible
    - Wait for job search interface to load completely (may take 1-2 seconds)
    - Take snapshot of job search interface
 
@@ -123,7 +73,7 @@ Continue with job search testing using MCP Playwright tool:
    - Locate the keyword search input field
    - Enter search term: "Computer Programmer"
    - Try one of these approaches in sequence:
-     - Click search button to execute search
+     - Click Search button on Job Search screen to start the search
      - Press Enter key while in the search field
      - If neither works, try tabbing to the search button and pressing Enter
    - Wait for search results to load completely (at least 1 second)
@@ -155,7 +105,7 @@ Expected Results: Successful job search with relevant results and accessible job
 ### Phase 3: Session Termination
 
 ```
-Complete the test suite with proper logout:
+Complete the test suite with proper logout without manual intervention:
 
 1. **Logout Process**:
    - From any authenticated page, locate "Logged in as Automated Testing" button in header
